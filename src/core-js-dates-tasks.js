@@ -260,18 +260,18 @@ function getQuarter(date) {
  */
 function getWorkSchedule(period, countWorkDays, countOffDays) {
   const res = [];
-  const startDateArr = period.start.split('-');
+  const startDateArr = period.start.split('-').map(Number);
   const startDate = new Date(
-    `${startDateArr[1]}-${startDateArr[0]}-${startDateArr[2]}`
+    Date.UTC(startDateArr[2], startDateArr[1] - 1, startDateArr[0])
   );
-  const endDateArr = period.end.split('-');
+  const endDateArr = period.end.split('-').map(Number);
   const endDate = new Date(
-    `${endDateArr[1]}-${endDateArr[0]}-${endDateArr[2]}`
+    Date.UTC(endDateArr[2], endDateArr[1] - 1, endDateArr[0])
   );
   let countWork = countWorkDays;
   while (startDate <= endDate) {
     if (countWork) {
-      res.push(startDate.toLocaleDateString('ru-RU').replaceAll('.', '-'));
+      res.push(startDate.toLocaleDateString('en-GB').replaceAll('/', '-'));
       countWork -= 1;
       startDate.setDate(startDate.getDate() + 1);
     } else {
