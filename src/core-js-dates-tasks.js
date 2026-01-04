@@ -217,7 +217,7 @@ function getNextFridayThe13th(date) {
   date.setDate(13);
   while (i < 12) {
     date.setMonth(i);
-    if (date.getUTCDay() === 4) {
+    if (date.getDay() === 5) {
       return date;
     }
     i += 1;
